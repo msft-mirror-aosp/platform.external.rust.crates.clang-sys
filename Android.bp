@@ -2,7 +2,6 @@
 
 rust_library_host_rlib {
     name: "libclang_sys",
-    deny_warnings: false,
     crate_name: "clang_sys",
     srcs: ["src/lib.rs"],
     edition: "2015",
