@@ -2,6 +2,7 @@
 
 rust_library_host {
     name: "libclang_sys",
+    // has rustc warnings
     crate_name: "clang_sys",
     srcs: ["src/lib.rs"],
     edition: "2015",
