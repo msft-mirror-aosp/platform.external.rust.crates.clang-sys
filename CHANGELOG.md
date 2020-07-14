@@ -1,3 +1,16 @@
+## [1.0.0] - 2020-07-14
+
+### Changed
+- Bumped `libloading` version to `0.6.0`
+- Updated build script to not print warnings about failures to execute
+`llvm-config` and `xcode-select` unless an instance of `libclang` is not found
+
+### Added
+- Added support for `clang` 10.0.x
+
+### Removed
+- Removed `gte_clang_*` Cargo features (these were an implementation detail)
+
 ## [0.29.3] - 2020-03-31
 
 ### Added
