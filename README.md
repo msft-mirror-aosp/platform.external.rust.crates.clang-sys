@@ -1,8 +1,8 @@
 # clang-sys
 
-[![crates.io](https://img.shields.io/crates/v/clang-sys.svg)](https://crates.io/crates/clang-sys)
-[![Travis CI](https://travis-ci.org/KyleMayes/clang-sys.svg?branch=master)](https://travis-ci.org/KyleMayes/clang-sys)
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/7tv5mjyg55rof356/branch/master?svg=true)](https://ci.appveyor.com/project/KyleMayes/clang-sys-vtvy5/branch/master)
+![Crate](https://img.shields.io/crates/v/clang-sys.svg)
+![Documentation](https://docs.rs/clang-sys/badge.svg)
+![CI](https://github.com/KyleMayes/clang-sys/workflows/CI/badge.svg?branch=master)
 
 Rust bindings for `libclang`.
 
@@ -44,6 +44,7 @@ To target a version of `libclang`, enable one of the following Cargo features:
 * `clang_7_0` - requires `libclang` 7.0 or later
 * `clang_8_0` - requires `libclang` 8.0 or later
 * `clang_9_0` - requires `libclang` 9.0 or later
+* `clang_10_0` - requires `libclang` 10.0 or later
 
 If you do not enable one of these features, the API provided by `libclang` 3.5 will be available by
 default.
