@@ -6,14 +6,14 @@ third_party {
     value: "https://crates.io/crates/clang-sys"
   }
   url {
-    type: GIT
-    value: "https://github.com/KyleMayes/clang-sys"
+    type: ARCHIVE
+    value: "https://static.crates.io/crates/clang-sys/clang-sys-1.0.0.crate"
   }
-  version: "0.29.3"
+  version: "1.0.0"
   license_type: NOTICE
   last_upgrade_date {
     year: 2020
-    month: 3
-    day: 31
+    month: 7
+    day: 13
   }
 }
