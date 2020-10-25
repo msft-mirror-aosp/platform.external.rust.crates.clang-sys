@@ -186,8 +186,8 @@ macro_rules! link {
         /// * the `libclang` shared library could not be opened
         pub fn load_manually() -> Result<SharedLibrary, String> {
             mod build {
-                pub mod common { include!("../out/common.rs"); }
-                pub mod dynamic { include!("../out/dynamic.rs"); }
+                pub mod common { include!(concat!(env!("OUT_DIR"), "/common.rs")); }
+                pub mod dynamic { include!(concat!(env!("OUT_DIR"), "/dynamic.rs")); }
             }
 
             let (directory, filename) = build::dynamic::find(true)?;
