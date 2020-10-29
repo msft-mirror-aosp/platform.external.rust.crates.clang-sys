@@ -3,14 +3,14 @@
 name = "clang-sys"
 authors = ["Kyle Mayes <kyle@mayeses.com>"]
 
-version = "1.0.0"
+version = "1.0.1"
 
 readme = "README.md"
 license = "Apache-2.0"
 
 description = "Rust bindings for libclang."
 
-documentation = "https://kylemayes.github.io/clang-sys/runtime/clang_sys"
+documentation = "https://docs.rs/clang-sys"
 repository = "https://github.com/KyleMayes/clang-sys"
 
 links = "clang"

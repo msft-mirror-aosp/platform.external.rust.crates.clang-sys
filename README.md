@@ -1,8 +1,8 @@
 # clang-sys
 
-![Crate](https://img.shields.io/crates/v/clang-sys.svg)
-![Documentation](https://docs.rs/clang-sys/badge.svg)
-![CI](https://github.com/KyleMayes/clang-sys/workflows/CI/badge.svg?branch=master)
+[![Crate](https://img.shields.io/crates/v/clang-sys.svg)](https://crates.io/crates/clang-sys)
+[![Documentation](https://docs.rs/clang-sys/badge.svg)](https://docs.rs/clang-sys)
+[![CI](https://github.com/KyleMayes/clang-sys/workflows/CI/badge.svg?branch=master)](https://github.com/KyleMayes/clang-sys/actions?query=workflow%3ACI)
 
 Rust bindings for `libclang`.
 
@@ -10,7 +10,7 @@ If you are interested in a Rust wrapper for these bindings, see
 [clang-rs](https://github.com/KyleMayes/clang-rs).
 
 Supported on the stable, beta, and nightly Rust channels.<br/>
-Minimum supported Rust version: **1.36.0**
+Minimum supported Rust version: **1.40.0**
 
 Released under the Apache License 2.0.
 
