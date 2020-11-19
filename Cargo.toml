@@ -12,7 +12,7 @@
 
 [package]
 name = "clang-sys"
-version = "1.0.1"
+version = "1.0.2"
 authors = ["Kyle Mayes <kyle@mayeses.com>"]
 build = "build.rs"
 links = "clang"
