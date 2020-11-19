@@ -1,3 +1,8 @@
+## [1.0.3] - 2020-11-19
+
+### Fixed
+- Fixed `Clang::find` panicking when `llvm-config` or `xcode-build` don't output anything to `stdout`
+
 ## [1.0.2] - 2020-11-17
 
 ### Fixed
