@@ -155,10 +155,12 @@ macro_rules! link {
             $(#[doc=$doc] #[cfg($cfg)])*
             pub unsafe fn $name($($pname: $pty), *) $(-> $ret)* {
                 let f = with_library(|l| {
-                    match l.functions.$name {
-                        Some(f) => f,
-                        _ => panic!(concat!("function not loaded: ", stringify!($name))),
-                    }
+                    l.functions.$name.expect(concat!(
+                        "`libclang` function not loaded: `",
+                        stringify!($name),
+                        "`. This crate requires that `libclang` 3.9 or later be installed on your ",
+                        "system. For more information on how to accomplish this, see here: ",
+                        "https://rust-lang.github.io/rust-bindgen/requirements.html#installing-clang-39"))
                 }).expect("a `libclang` shared library is not loaded on this thread");
                 f($($pname), *)
             }
@@ -186,8 +188,8 @@ macro_rules! link {
         /// * the `libclang` shared library could not be opened
         pub fn load_manually() -> Result<SharedLibrary, String> {
             mod build {
-                pub mod common { include!("../out/common.rs"); }
-                pub mod dynamic { include!("../out/dynamic.rs"); }
+                pub mod common { include!(concat!(env!("OUT_DIR"), "/common.rs")); }
+                pub mod dynamic { include!(concat!(env!("OUT_DIR"), "/dynamic.rs")); }
             }
 
             let (directory, filename) = build::dynamic::find(true)?;

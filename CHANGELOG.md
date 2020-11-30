@@ -1,3 +1,24 @@
+## [1.0.3] - 2020-11-19
+
+### Fixed
+- Fixed `Clang::find` panicking when `llvm-config` or `xcode-build` don't output anything to `stdout`
+
+## [1.0.2] - 2020-11-17
+
+### Fixed
+- Fixed `Clang::find` to properly search directories returned by the
+`llvm-config --bindir` and `xcodebuild -find clang` commands
+- Improved version selection algorithm in the case where there are multiple
+instances of `libclang` with the highest version found; previously the lowest
+priority instance would be selected instead of the highest priority instance
+(e.g., the versions found by searching the fallback directories were preferred
+over the versions found by searching the `llvm-config --prefix` directory)
+
+## [1.0.1] - 2020-10-01
+
+### Changed
+- Improved panic error message when calling an unloaded function
+
 ## [1.0.0] - 2020-07-14
 
 ### Changed
