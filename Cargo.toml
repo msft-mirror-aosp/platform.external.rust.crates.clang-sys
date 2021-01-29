@@ -12,12 +12,12 @@
 
 [package]
 name = "clang-sys"
-version = "1.0.0"
+version = "1.0.3"
 authors = ["Kyle Mayes <kyle@mayeses.com>"]
 build = "build.rs"
 links = "clang"
 description = "Rust bindings for libclang."
-documentation = "https://kylemayes.github.io/clang-sys/runtime/clang_sys"
+documentation = "https://docs.rs/clang-sys"
 readme = "README.md"
 license = "Apache-2.0"
 repository = "https://github.com/KyleMayes/clang-sys"
