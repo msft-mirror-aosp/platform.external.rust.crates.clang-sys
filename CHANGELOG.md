@@ -1,3 +1,8 @@
+## [1.1.1] - 2021-02-19
+
+### Changed
+- Bumped `libloading` version to `0.7`
+
 ## [1.1.0] - 2021-02-09
 
 ### Changed
