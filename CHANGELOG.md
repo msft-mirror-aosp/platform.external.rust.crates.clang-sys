@@ -1,3 +1,19 @@
+## [1.2.2] - 2021-09-02
+
+### Fixed
+- Fixed handling of paths that contain characters that have special meaning in
+glob patterns (e.g., `[` or `]`)
+
+## [1.2.1] - 2021-08-24
+
+### Changed
+- Updated build script to check the install location used by the
+[Scoop](https://scoop.sh/) command-line installer on Windows
+
+### Fixed
+- Updated build script to support environments where the `PATH` environment
+variable is not set
+
 ## [1.2.0] - 2021-04-08
 
 ### Changed
