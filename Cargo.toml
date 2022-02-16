@@ -12,7 +12,7 @@
 
 [package]
 name = "clang-sys"
-version = "1.2.2"
+version = "1.1.1"
 authors = ["Kyle Mayes <kyle@mayeses.com>"]
 build = "build.rs"
 links = "clang"
@@ -22,7 +22,7 @@ readme = "README.md"
 license = "Apache-2.0"
 repository = "https://github.com/KyleMayes/clang-sys"
 [package.metadata.docs.rs]
-features = ["clang_11_0", "runtime"]
+features = ["clang_10_0", "runtime"]
 [dependencies.glob]
 version = "0.3"
 
