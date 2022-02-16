@@ -20,7 +20,7 @@ use std::env;
 use std::path::{Path, PathBuf};
 use std::process::Command;
 
-use glob::{MatchOptions, Pattern};
+use glob::MatchOptions;
 
 /// `libclang` directory patterns for FreeBSD and Linux.
 const DIRECTORIES_LINUX: &[&str] = &[
@@ -49,9 +49,6 @@ const DIRECTORIES_WINDOWS: &[&str] = &[
     // LLVM + Clang can be installed as a component of Visual Studio.
     // https://github.com/KyleMayes/clang-sys/issues/121
     "C:\\Program Files*\\Microsoft Visual Studio\\*\\BuildTools\\VC\\Tools\\Llvm\\**\\bin",
-    // Scoop user installation https://scoop.sh/.
-    // Chocolatey, WinGet and other installers use to the system wide dir listed above
-    "C:\\Users\\*\\scoop\\apps\\llvm\\current\\bin",
 ];
 
 thread_local! {
@@ -64,17 +61,15 @@ thread_local! {
 fn run_command(name: &str, command: &str, arguments: &[&str]) -> Option<String> {
     macro_rules! error {
         ($error:expr) => {{
-            COMMAND_ERRORS.with(|e| {
-                e.borrow_mut()
-                    .entry(name.into())
-                    .or_insert_with(Vec::new)
-                    .push(format!(
-                        "couldn't execute `{} {}` ({})",
-                        command,
-                        arguments.join(" "),
-                        $error,
-                    ))
-            });
+            COMMAND_ERRORS.with(|e| e.borrow_mut()
+                .entry(name.into())
+                .or_insert_with(Vec::new)
+                .push(format!(
+                    "couldn't execute `{} {}` ({})",
+                    command,
+                    arguments.join(" "),
+                    $error,
+                )));
         }};
     }
 
@@ -105,7 +100,7 @@ pub fn run_llvm_config(arguments: &[&str]) -> Option<String> {
 /// commands on drop if not discarded.
 #[derive(Default)]
 pub struct CommandErrorPrinter {
-    discard: bool,
+    discard: bool
 }
 
 impl CommandErrorPrinter {
@@ -128,11 +123,7 @@ impl Drop for CommandErrorPrinter {
                 times, if the LLVM_CONFIG_PATH environment variable is set to \
                 a full path to valid `llvm-config` executable it will be used \
                 to try to find an instance of `libclang` on your system: {}",
-                errors
-                    .iter()
-                    .map(|e| format!("\"{}\"", e))
-                    .collect::<Vec<_>>()
-                    .join("\n  "),
+                errors.iter().map(|e| format!("\"{}\"", e)).collect::<Vec<_>>().join("\n  "),
             )
         }
 
@@ -142,11 +133,7 @@ impl Drop for CommandErrorPrinter {
                 times, if a valid instance of this executable is on your PATH \
                 it will be used to try to find an instance of `libclang` on \
                 your system: {}",
-                errors
-                    .iter()
-                    .map(|e| format!("\"{}\"", e))
-                    .collect::<Vec<_>>()
-                    .join("\n  "),
+                errors.iter().map(|e| format!("\"{}\"", e)).collect::<Vec<_>>().join("\n  "),
             )
         }
     }
@@ -155,15 +142,10 @@ impl Drop for CommandErrorPrinter {
 /// Returns the paths to and the filenames of the files matching the supplied
 /// filename patterns in the supplied directory.
 fn search_directory(directory: &Path, filenames: &[String]) -> Vec<(PathBuf, String)> {
-    // Escape the directory in case it contains characters that have special
-    // meaning in glob patterns (e.g., `[` or `]`).
-    let directory = Pattern::escape(directory.to_str().unwrap());
-    let directory = Path::new(&directory);
-
     // Join the directory to the filename patterns to obtain the path patterns.
     let paths = filenames
         .iter()
-        .map(|f| directory.join(f).to_str().unwrap().to_owned());
+        .filter_map(|f| directory.join(f).to_str().map(ToOwned::to_owned));
 
     // Prevent wildcards from matching path separators.
     let mut options = MatchOptions::new();
@@ -178,7 +160,7 @@ fn search_directory(directory: &Path, filenames: &[String]) -> Vec<(PathBuf, Str
             }
         })
         .filter_map(|p| {
-            let filename = p.file_name()?.to_str().unwrap();
+            let filename = p.file_name().and_then(|f| f.to_str())?;
 
             // The `libclang_shared` library has been renamed to `libclang-cpp`
             // in Clang 10. This can cause instances of this library (e.g.,
@@ -253,7 +235,7 @@ pub fn search_libclang_directories(files: &[String], variable: &str) -> Vec<(Pat
     // Search the directories provided by the `LD_LIBRARY_PATH` environment
     // variable.
     if let Ok(path) = env::var("LD_LIBRARY_PATH") {
-        for directory in env::split_paths(&path) {
+        for directory in path.split(':').map(Path::new) {
             found.extend(search_directories(&directory, files));
         }
     }
