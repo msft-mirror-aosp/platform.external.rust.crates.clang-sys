@@ -1,16 +1,16 @@
-name: CI
+name: SSH
 
 on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+  workflow_dispatch:
+    inputs:
+      os:
+        description: "Operating System"
+        required: true
+        default: "ubuntu-latest"
 
 jobs:
-  ci:
-    name: CI
+  ssh:
+    name: SSH
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -20,25 +20,21 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+        if: github.event.inputs.os == matrix.os
       # LLVM and Clang
       - name: Install LLVM and Clang
         uses: KyleMayes/install-llvm-action@v1
+        if: github.event.inputs.os == matrix.os
         with:
           version: ${{ matrix.clang[0] }}
           directory: ${{ runner.temp }}/llvm-${{ matrix.clang[0] }}
       # Rust
       - name: Install Rust
         uses: actions-rs/toolchain@v1
+        if: github.event.inputs.os == matrix.os
         with:
           toolchain: ${{ matrix.rust }}
-      # Test
-      - name: Cargo Test (Dynamic)
-        uses: actions-rs/cargo@v1
-        with:
-          command: test
-          args: --verbose --features ${{ matrix.clang[1] }} -- --nocapture
-      - name: Cargo Test (Runtime)
-        uses: actions-rs/cargo@v1
-        with:
-          command: test
-          args: --verbose --features "${{ matrix.clang[1] }} runtime" -- --nocapture
+      # SSH
+      - name: Enable SSH
+        uses: mxschmitt/action-tmate@v3
+        if: github.event.inputs.os == matrix.os
