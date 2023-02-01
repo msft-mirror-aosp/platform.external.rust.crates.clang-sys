@@ -32,7 +32,7 @@ rust_library_host {
     name: "libclang_sys",
     crate_name: "clang_sys",
     cargo_env_compat: true,
-    cargo_pkg_version: "1.3.1",
+    cargo_pkg_version: "1.4.0",
     srcs: [
         "src/lib.rs",
         ":copy_clang-sys_build_out",
@@ -58,5 +58,9 @@ rust_library_host {
         "libglob",
         "liblibc",
         "liblibloading",
+    ],
+    apex_available: [
+        "//apex_available:platform",
+        "//apex_available:anyapex",
     ],
 }
