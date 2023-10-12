@@ -59,6 +59,4 @@ rust_library_host {
         "liblibc",
         "liblibloading",
     ],
-    product_available: true,
-    vendor_available: true,
 }
