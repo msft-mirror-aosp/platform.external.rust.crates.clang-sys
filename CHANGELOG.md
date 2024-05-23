@@ -1,3 +1,40 @@
+## [1.7.0] - 2023-12-31
+
+### Added
+- Added support for `clang` 17.0.x
+
+## [1.6.1] - 2023-03-29
+
+### Fixed
+- Improved error message when calling a `libclang` function that is not supported by the loaded `libclang` instance (https://github.com/rust-lang/rust-bindgen/issues/2446)
+
+## [1.6.0] - 2023-02-18
+
+### Changed
+- MinGW directories are not searched for `libclang` instances on Windows when
+compiling for an MSVC target
+- Bumped minimum supported Rust version (MSRV) to 1.51.0
+- Changed Windows search directory preferences (`libclang` instances from
+Visual Studio installs are now the lowest priority rather than the second
+highest)
+
+## ~~[1.5.1] - 2023-02-05~~ (YANKED)
+
+### Changed
+- MinGW directories are not searched for `libclang` instances on Windows when
+compiling for an MSVC target
+
+## ~~[1.5.0] - 2023-02-05~~ (YANKED)
+
+### Changed
+- Bumped minimum supported Rust version (MSRV) to 1.51.0
+- Changed Windows search directory preferences (`libclang` instances from
+Visual Studio installs are now the lowest priority rather than the second
+highest)
+
+### Added
+- Added additional support for `clang` 16.0.x
+
 ## [1.4.0] - 2022-09-22
 
 ### Changed
